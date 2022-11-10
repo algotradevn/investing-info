@@ -59,13 +59,13 @@ async def listen_websocket(url, indices_key):
                     info.update(id_to_indices[int(info['pid'])])
 
                     # push to redis
-                    symbol = info['symbol']
+                    symbol = info['title'].replace(' ', '_')
                     info_data = ujson.dumps(info)
 
                     if r.exists(symbol):
                         old_data = r.get(symbol)
                         if info_data != old_data:
-                            r.publish(symbol, ujson.dumps(get_change_value(ujson.loads(r.get(symbol)) , info)))
+                            r.publish(symbol, ujson.dumps(get_change_value(ujson.loads(old_data) , info)))
                     else:
                         r.publish(symbol, info_data)
 
