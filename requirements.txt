@@ -1,0 +1,4 @@
+pyppeteer==1.0.2
+python-dotenv==0.21.0
+redis==4.3.4
+ujson==5.5.0
