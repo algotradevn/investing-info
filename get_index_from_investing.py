@@ -79,7 +79,10 @@ async def listen_websocket(url, indices_key):
 
 def get_change_value(old_item, new_item):
     for key in new_item:
-        if old_item[key] == new_item[key] and key not in ['pid', 'pc_col', 'symbol', 'title']:
+        if (key in old_item 
+            and old_item[key] == new_item[key] 
+            and key not in ['pid', 'pc_col', 'symbol', 'title']
+        ):
             new_item[key] = None
     return new_item
 
